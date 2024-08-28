@@ -1,0 +1,26 @@
+<div style="padding: 30px;">
+    <nz-table #basicTable [nzData]="cources" [nzFrontPagination]="false"
+    [nzPageSize]="10" [nzTotal]="total"
+    (nzPageIndexChange)="pageIndexChange($event)">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Payment Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>{{data.userName}}</td>
+            <td>{{data.userEmail}}</td>
+            <td>{{data.membershipStatus}}</td>
+            <td>
+                <button *ngIf="data.membershipStatus=='UnPaid'" 
+                (click)="updatePaymentStatus(data.id)"
+                nz-button nzType="primary">Mark as Paid</button>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+</div>

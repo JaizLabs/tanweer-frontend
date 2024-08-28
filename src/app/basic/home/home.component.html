@@ -1,0 +1,49 @@
+<div class="main">
+
+    <div nz-row>
+        <div nz-col nzSpan="24">
+            <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm" (ngSubmit)="submitForm()">
+                <nz-form-item>
+                    <nz-form-control >
+                        <input formControlName="name" nz-input placeholder="Search Keyword" />
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control>
+                        <button nz-button nzType="primary" [disabled]="!searchForm.valid">Search</button>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control>
+                        <button nz-button nzType="primary" (click)="refresh()">Refresh</button>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+
+            <div style="margin-top: 30px;">
+                <nz-card *ngIf="cources.length == 0" [nzBordered]="true"
+                    style="width: 70%; margin: auto; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+                    <nz-empty style="padding: 10px;"></nz-empty>
+                </nz-card>
+            </div>
+
+            <span *ngFor="let cource of cources" style="margin: 20px; ">
+                <nz-card nzTitle="{{cource.name}}" [nzBordered]="true"
+                    style="width: 70%; margin: auto; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+                    
+                    <p><strong>Price:</strong> {{ cource.price }}</p>
+                    <p><strong>Description:</strong> {{ cource.description }}</p>
+                    <button nz-button nzType="primary" (click)="createMembership(cource.id)">Subscribe
+                        Membership</button>
+                </nz-card>
+            </span>
+
+            <div class="pagination">
+                <nz-pagination [nzPageIndex]="currentPage" [nzTotal]="total" nzPageSize="10"
+                    (nzPageIndexChange)="pageIndexChange($event)"></nz-pagination>
+            </div>
+        </div>
+    </div>
+</div>
